@@ -16,7 +16,8 @@ $ heroku buildpacks:add heroku/nodejs
 Add the GH_PKG_TOKEN config var in Heroku with your read-only GITHUB package management token
 
 ``` bash
- $ heroku config:set 00000000-0000-0000-0000-000000000000
+ $ heroku config:set GH_PKG_TOKEN 00000000-0000-0000-0000-000000000000
+ $ heroku config:set GH_PKG_REGISTRY @groupize:registry
 ```
 
 ## References
