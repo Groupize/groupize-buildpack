@@ -13,9 +13,6 @@ if [ -z "$CUSTOM_PKG_REGISTRY" ]; then
     CUSTOM_PKG_REGISTRY="$(cat $ENV_DIR/GH_PKG_REGISTRY)"
 fi
 
-echo "$CUSTOM_PKG_TOKEN"
-echo "$CUSTOM_PKG_REGISTRY"
-
 if [ "$CUSTOM_PKG_TOKEN" != "" ] && [ "$CUSTOM_PKG_REGISTRY" != "" ]; then
 	echo "-----> Using .npmrc to install packages from github package management"
 	echo "//npm.pkg.github.com/:_authToken=$CUSTOM_PKG_TOKEN" > "$BUILD_DIR/.npmrc"
