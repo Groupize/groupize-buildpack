@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+ENV_DIR=${3:-}
+BUILD_DIR=${1:-}
+CUSTOM_PKG_TOKEN=$GH_PKG_TOKEN
+CUSTOM_PKG_REGISTRY=$GH_PKG_REGISTRY
+
+if [ -z "$CUSTOM_PKG_TOKEN" ]; then
+    CUSTOM_PKG_TOKEN="$(cat $ENV_DIR/GH_PKG_TOKEN)"
+fi
+
+if [ -z "$CUSTOM_PKG_REGISTRY" ]; then
+    CUSTOM_PKG_REGISTRY="$(cat $ENV_DIR/GH_PKG_REGISTRY)"
+fi
+
+echo "$CUSTOM_PKG_TOKEN"
+echo "$CUSTOM_PKG_REGISTRY"
+
+if [ "$CUSTOM_PKG_TOKEN" != "" ] && [ "$CUSTOM_PKG_REGISTRY" != "" ]; then
+	echo "-----> Using .npmrc to install packages from github package management"
+	echo "//npm.pkg.github.com/:_authToken=$CUSTOM_PKG_TOKEN" > "$BUILD_DIR/.npmrc"
+	echo "$CUSTOM_PKG_REGISTRY=https://npm.pkg.github.com/" >> "$BUILD_DIR/.npmrc"
+	exit 0
+fi
